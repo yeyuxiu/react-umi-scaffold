@@ -10,9 +10,7 @@ export default defineConfig({
     momentPicker: true,
   },
   initialState: {},
-  request: {
-    dataField: 'data',
-  },
+  request: {},
   access: {},
   model: {},
   dva: {},
@@ -34,11 +32,11 @@ export default defineConfig({
   },
   npmClient: 'pnpm',
 
-  locale: {
-    // 默认使用 src/locales/zh-CN.ts 作为多语言文件
-    default: 'zh-CN',
-    baseSeparator: '-',
-  },
+  // locale: {
+  //   // 默认使用 src/locales/zh-CN.ts 作为多语言文件
+  //   default: 'zh-CN',
+  // baseSeparator: '-',
+  // },
 
   hash: true,
 
@@ -96,5 +94,5 @@ export default defineConfig({
   routes: routes,
   // 扩展 Umi 内置的 webpack 配置
   chainWebpack: webpackConfig,
-  tailwindcss: {},
+  // tailwindcss: {},
 });

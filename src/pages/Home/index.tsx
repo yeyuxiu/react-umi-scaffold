@@ -1,18 +1,61 @@
-import { PageContainer } from '@ant-design/pro-components';
-import { useModel } from '@umijs/max';
+import { postReq } from '@/utils/request';
+import { UploadOutlined } from '@ant-design/icons';
+import type { UploadProps } from 'antd'; //get
+import { Button, message, Upload } from 'antd';
 import React from 'react';
-import { FormattedMessage } from 'umi';
-import styles from './index.less';
+
+// const getJson = (): Promise<any> => {
+//   return getReq('/api/someJSON');
+// };
+
+interface student {
+  username: string;
+  // age: number
+}
+// post
+const postJson = (obj: student): Promise<any> => {
+  return postReq('/api/postJSON', obj);
+};
+
+const uploadPorps: UploadProps = {
+  name: 'file',
+  action: '/api/upload',
+  // headers: {
+  //   authorization: 'authorization-text',
+  // },
+  onChange(info) {
+    if (info.file.status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully`);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+};
 
 const HomePage: React.FC = () => {
-  const { name } = useModel('global');
   return (
-    <PageContainer ghost>
-      <div className={styles.container}>
-        <FormattedMessage id="welcome" />
-        {name}
-      </div>
-    </PageContainer>
+    <div>
+      <Button onClick={() => {}}>get请求</Button>
+      <Button
+        onClick={() => {
+          postJson({
+            username: 'smilechao',
+            // age: 18,
+          }).then((res) => {
+            console.log(res, 'post请求');
+          });
+        }}
+      >
+        post请求
+      </Button>
+
+      <Upload {...uploadPorps}>
+        <Button icon={<UploadOutlined />}>Click to Upload</Button>
+      </Upload>
+    </div>
   );
 };
 
