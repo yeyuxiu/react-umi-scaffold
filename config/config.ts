@@ -26,7 +26,7 @@ export default defineConfig({
   },
   // babel-plugin-transform-remove-console 暂时无法安装
   extraBabelPlugins: [IS_PROD ? 'transform-remove-console' : ''],
-
+  extraPostCSSPlugins: [require('tailwindcss'), require('autoprefixer')],
   layout: {
     title: 'react+umi脚手架',
   },
@@ -94,5 +94,5 @@ export default defineConfig({
   routes: routes,
   // 扩展 Umi 内置的 webpack 配置
   chainWebpack: webpackConfig,
-  // tailwindcss: {},
+  tailwindcss: {},
 });

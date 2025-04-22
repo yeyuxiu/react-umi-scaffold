@@ -10,7 +10,7 @@ import React from 'react';
 
 interface student {
   username: string;
-  // age: number
+  age: number;
 }
 // post
 const postJson = (obj: student): Promise<any> => {
@@ -43,7 +43,7 @@ const HomePage: React.FC = () => {
         onClick={() => {
           postJson({
             username: 'smilechao',
-            // age: 18,
+            age: 18,
           }).then((res) => {
             console.log(res, 'post请求');
           });
@@ -55,6 +55,14 @@ const HomePage: React.FC = () => {
       <Upload {...uploadPorps}>
         <Button icon={<UploadOutlined />}>Click to Upload</Button>
       </Upload>
+
+      <div>
+        <div className="text-gray-900 h6 w6 bg-sky-400">1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+      </div>
     </div>
   );
 };
