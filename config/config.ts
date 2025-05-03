@@ -1,3 +1,10 @@
+/*
+ * @Author: yeyuxiu
+ * @Date: 2025-04-23 08:20:08
+ * @LastEditors: yeyuxiu
+ * @LastEditTime: 2025-05-03 10:49:34
+ * @Description: 配置文件
+ */
 import { defineConfig } from '@umijs/max';
 import proxy from './proxy';
 import routes from './routes';
@@ -27,9 +34,9 @@ export default defineConfig({
   // babel-plugin-transform-remove-console 暂时无法安装
   extraBabelPlugins: [IS_PROD ? 'transform-remove-console' : ''],
   extraPostCSSPlugins: [require('tailwindcss'), require('autoprefixer')],
-  layout: {
-    title: 'react+umi脚手架',
-  },
+  // layout: {
+  //   title: 'react+umi脚手架',
+  // },
   npmClient: 'pnpm',
 
   // locale: {
@@ -43,11 +50,11 @@ export default defineConfig({
   targets: {
     ie: 9,
   },
-  theme: {
-    '@primary-color': '#448EF7',
-    'root-entry-name': 'variable',
-    '@border-radius-base': '4px',
-  },
+  // theme: {
+  //   '@primary-color': '#448EF7',
+  //   'root-entry-name': 'variable',
+  //   '@border-radius-base': '4px',
+  // },
 
   // 定制类名生成模式
   cssLoader: {
@@ -94,5 +101,4 @@ export default defineConfig({
   routes: routes,
   // 扩展 Umi 内置的 webpack 配置
   chainWebpack: webpackConfig,
-  tailwindcss: {},
 });

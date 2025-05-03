@@ -1,3 +1,10 @@
+<!--
+ * @Author: yeyuxiu
+ * @Date: 2025-04-20 20:52:21
+ * @LastEditors: yeyuxiu
+ * @LastEditTime: 2025-05-03 10:50:55
+ * @Description:  说明
+-->
 # react-umi-scaffold
 
 react-umi 搭建的脚手架
@@ -15,12 +22,4 @@ pnpm start
 ```
 
 ### 初始化
-
-1. `config/config.ts` `src/app.ts`的基本配置
-2. layouts 基本布局
-3. 丰富`utils`工具函数
-4. 补充`compents`组件库
-5. 完善登录、普通请求
-6. `@umijs/max` 配置使用
-
-[ahooks](https://ahooks-v2.js.org/zh-CN/hooks/async) [umi4](https://umijs.org/docs/max/request)
+1. 主题模式还没实现

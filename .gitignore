@@ -1,3 +1,6 @@
+.idea
+/.DS_Store
+/src/.DS_Store
 /node_modules
 /.env.local
 /.umirc.local.ts

@@ -1,6 +1,7 @@
 import { request } from '@umijs/max';
 import { message } from 'antd';
 import type { RequestConfig } from 'umi';
+import {history} from 'umi'
 
 // 登录后的信息，可以放在请求头
 const headersConfig = {
@@ -30,50 +31,52 @@ interface ResponseStructure {
 // 运行时 request 配置
 export const requestConfig: RequestConfig = {
   timeout: 1000,
-  // other axios options you want
   withCredentials: true,
   headers: headersConfig,
   errorConfig: {
     errorThrower: (res: ResponseStructure) => {
       // 不知道为什么请求不走这里
-      console.log(res, 'res');
+      console.log(res, '不知道为什么请求不走这里');
     },
     errorHandler: (error: any, opts: any) => {
       if (opts?.skipErrorHandler) throw error;
-      // 我们的 errorThrower 抛出的错误。
-      if (error.name === 'AxiosError') {
+      // if (error.name === 'AxiosError') {
+      if (error.response.status === 500 && error.response.data.message) {
+        message.error(error.response.data.message);
+      } else if (error.response.status === 302) {
+        message.warning("身份验证失效，请重新登陆")
+        history.push('/login')
+      } else {
         message.error('服务器异常！');
       }
     },
   },
   // 请求阶段的拦截器
   requestInterceptors: [
-    // (url, options) =>
-    //     {
-    //       // do something
-    //       return { url, options }
-    //     },
+    (url, options) => {
+      const token = sessionStorage.getItem('token');
+      // 有token请求头带上token，没token自动跳登陆业
+      if (token) {
+        options.headers = {
+          ...options.headers,
+          Authorization: 'Bearer ' + token,
+        };
+      } else {
+        history.push("/login")
+      }
+      return { url, options };
+    },
     //   // 一个二元组，第一个元素是 request 拦截器，第二个元素是错误处理
     //   [(url, options) => {return { url, options }}, (error) => {return Promise.reject(error)}],
   ],
   // 响应阶段的拦截器
   responseInterceptors: [
-    // (response) => {
+    // (response:any) => {
     //   const { data } = response;
-    //   console.log(data, 'datadatadatadatadatadatadatadata');
-    //   if(!data.success){
-    //     message.error('请求失败！');
-    //   }
+    //   console.log(response, 'response');
+    //   console.log(data, 'data');
     //   return response;
     // }
-    //         // 直接写一个 function，作为拦截器
-    // (response) =>
-    //     {
-    //       // 不再需要异步处理读取返回体内容，可直接在data中读出，部分字段可在 config 中找到
-    //       const { data = {} as any, config } = response;
-    //       // do something
-    //       return response
-    //     },
     //   // 一个二元组，第一个元素是 request 拦截器，第二个元素是错误处理
     //   [(response) => {return response}, (error) => {return Promise.reject(error)}],
   ],
