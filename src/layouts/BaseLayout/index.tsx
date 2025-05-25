@@ -2,7 +2,7 @@
  * @Author: yeyuxiu
  * @Date: 2025-04-30 19:20:23
  * @LastEditors: yeyuxiu
- * @LastEditTime: 2025-05-03 10:21:02
+ * @LastEditTime: 2025-05-24 13:16:42
  * @Description: 基本布局
  */
 
@@ -40,9 +40,9 @@ const App: React.FC = () => {
       </Sider>
       <Layout>
         <HeaderCom />
-        <Content className="px-4 dark:bg-gray-900">
+        <Content className="px-4 dark:bg-gray-900 h-[calc(100%-118px)]">
           <Breadcurmb />
-          <div className="p-4 h-full bg-white dark:bg-gray-800 rounded-sm">
+          <div className="p-4 bg-white h-full dark:bg-gray-800 rounded-sm">
             <Outlet />
           </div>
         </Content>
