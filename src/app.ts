@@ -5,25 +5,20 @@
  * @LastEditTime: 2025-05-15 10:05:12
  * @Description: 运行时配置
  */
-import '../tailwind.css'
-import React from 'react';
-import { ConfigProvider } from 'antd';
-import zhCN from 'antd/es/locale/zh_CN';
 import { requestConfig } from '@/utils/request';
 import type { RequestConfig } from 'umi';
+import '../tailwind.css';
 
 export async function getInitialState(): Promise<{ name: string }> {
   return { name: '@umijs/max' };
 }
 
-const ConfigLocale = props => {
-  return <ConfigProvider locale={zhCN}>{props.children}</ConfigProvider>;
-};
-export function rootContainer(container) {
-  return React.createElement(ConfigLocale, null, container);
-}
-
-
+// const ConfigLocale = props => {
+//   return <ConfigProvider locale={zhCN}>{props.children}</ConfigProvider>;
+// };
+// export function rootContainer(container) {
+//   return React.createElement(ConfigLocale, null, container);
+// }
 
 // export const layout = () => {
 //   return {
